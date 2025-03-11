@@ -9,7 +9,7 @@
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
 
     <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
-        {{-- Logo --}}
+        
         <div class="flex justify-center mb-7">
             <img src="{{ asset('images/logo ankes.jpeg') }}" alt="Logo" width="150">
         </div>
