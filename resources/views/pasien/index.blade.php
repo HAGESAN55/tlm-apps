@@ -10,6 +10,8 @@
       <a href="{{ route('pasien.create') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ">
       + Registrasi Pasien
       </a>
+      <a href="{{ route('pasien.manage.index')}}" class="rounded-lg px-4 py-2 text-white font-semibold bg-yellow-400 hover:bg-yellow-500">Manage Pasien</a>
+
 
       @if (session('success'))
           <div id="success-message" class="fixed right-14 bg-green-200 text-green-700 py-2 px-4 rounded-lg">
@@ -38,7 +40,6 @@
                 <th class="py-3 px-6 text-left">Kategori</th>
                 <th class="py-3 px-6 text-left">Gender</th>
                 <th class="py-3 px-6 text-left">Dokter</th>
-                <th class="py-3 px-6 text-left">Aksi</th>
             </tr>
         </thead>
         <tbody class="text-gray-600 text-sm">
@@ -54,20 +55,11 @@
                 <td class="py-3 px-6">{{ $data->kateg ? $data->kateg->kategori : 'Tidak ada' }}</td>
                 <td class="py-3 px-6">{{ $data->jenis_kelamin }}</td>
                 <td class="py-3 px-6">{{ $data->dokter ?$data->dokter->nama_dokter : 'Tidak ada Dokter' }}</td>
-                <td>
-                <form id='delet-met'action="{{ route('pasien.destroy', $data->kd_reg) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" id='delet-med' class="bg-red-500 text-white px-4 py-2 rounded">Hapus</button>
-                </form>
-                </td>
             </tr>
             @endforeach
 
         </tbody>
     </table> 
-    <div class="m-3">
-        <a href="{{ route('pasien.manage.index')}}" class="rounded-lg px-4 py-2 text-white font-semibold bg-yellow-400 hover:bg-yellow-500">Manage Pasien</a>
-    </div>
+
 </div>
 @endsection

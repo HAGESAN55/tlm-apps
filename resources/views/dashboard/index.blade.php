@@ -44,7 +44,7 @@
             <div class="bg-white p-6 rounded-lg shadow-lg">
                 <h2 class="text-xl font-bold text-gray-700">Rp. {{ number_format($totalpenghasilan, 0, ',', '.') }}</h2>
                 <p class="text-gray-600"></p>
-                <a href="{{ route('pemeriksaan.index') }}" class="text-yellow-600 font-semibold">Lihat peghasilan!</a>
+                <a href="{{ route('transaksi.index') }}" class="text-yellow-600 font-semibold">Lihat peghasilan!</a>
             </div>
 
             

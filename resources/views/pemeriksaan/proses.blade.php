@@ -105,16 +105,15 @@
                 
                 <div class="col-lg-6 mt-3">
                         <!-- Tombol untuk Membuka Modal -->
-                        <button type="button" @click="openModal = true" class="bg-blue-400 text-white px-6 py-2 rounded-lg">
+                        <button type="button" @click="openModal = true" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg">
                             Pilih
                         </button>
                         @if($pasien->status_pembayaran == "0")
-                        <button id="form-reg-pasien" type="submit" class="bg-yellow-400 text-white px-4 py-2 rounded-lg shadow-mt-3" value='tambahkan'>
+                        <button id="form-reg-pasien" type="submit" class="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded-lg shadow-mt-3" value='tambahkan'>
                             Tambah Data
                         </button>
                         @endif
-                        {{-- <button type="button" class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow mt-3" onclick="window.history.go(-1)">Kembali</button> --}}
-                        <a href="{{ route('pasien.manage.index') }}" class="bg-blue-600 text-white font-normal px-4 py-2 rounded-lg shadow-mt-3">Kembali</a>
+                        <a href="{{ route('pasien.manage.index') }}" class="bg-gray-600 hover:bg-gray-700 text-white font-normal px-4 py-2 rounded-lg shadow-mt-3">Kembali</a>
                         <!-- Modal -->
                         <div x-show="openModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                         <div class="bg-white p-6 rounded-lg shadow-lg  max-h-96 overflow-y-auto">
@@ -186,7 +185,7 @@
             </div>
             <div class="mt-3">
                 <input type="hidden" name="kd_reg" id="kd_reg" value="{{ $pasien->kd_reg }}">
-                <input type="text" name="bayar" id="bayar" class="border p-2 w-full md-4">
+                <input type="text" name="bayar" id="bayar" class="border p-2 w-full m-4">
                 <button id="form-bayar" type="submit" class='bg-blue-500 text-white px-6 py-2 rounded-lg'>Bayar</button>
             </div>
             </form>
@@ -195,12 +194,12 @@
             <form action="{{ route('print.hasil') }}" method="get" id='print-hasil' target='_blank'>
                 @csrf
                 <input type="hidden" name="kd_reg" id="kd_reg" value="{{ $pasien->kd_reg }}">
-                <button id="print-hasil" type="submit" class='bg-green-500 text-white px-6 py-2 rounded-lg'>Print Hasil</button>
+                <button id="print-hasil" type="submit" class='bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg'>Print Hasil</button>
             </form>
             <form action="{{ route('print.kwitansi') }}" method="get" id='print-kwitansi' target='_blank'>
                 @csrf
                 <input type="hidden" name="kd_reg" id="kd_reg" value="{{ $pasien->kd_reg }}">
-                <button id="print-kwitansi" type="submit" class='bg-blue-500 text-white px-6 py-2 rounded-lg'>Print Kwitansi</button>
+                <button id="print-kwitansi" type="submit" class='bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg'>Print Kwitansi</button>
             </form>
             </div>
             @endif
@@ -213,12 +212,15 @@
                 <thead>
                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leadong-normal">
                     <th class="px-6 text-left py-2">NO</th>
+                    @if ($pasien->status_pembayaran == "0" && count($transaksi) != 0)
+                    <th class="px-6 text-center-py-2">Aksi</th>
+                    @endif
                     <th class="px-6 text-left py-2">Bidang Pemeriksaan</th>
                     <th class="px-6 text-left py-2">Periksa</th>
                     <th class="px-6 text-left py-2">Sub Periksa</th>
                     <th class="px-6 text-left py-2">Hasil Pemeriksaan</th>
                     <th class="px-6 text-left py-2">Nilai Normal</th>
-                    <th class="px-6 text-left py-2">Tarif</th>
+                    <th class="px-6 text-right py-2">Tarif</th>
                 </tr>
                 </thead>
                 <tbody class="text-gray-600 text-sm">
@@ -227,17 +229,33 @@
                     @foreach ($transaksi as $index => $data)
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
                         <td class="px-6 py-2">{{ $index+=1 }}</td>
+                        @if ($pasien->status_pembayaran == "0" && count($transaksi) != 0)
+                        <td class="px-6 py-2">
+                            <form action="{{ route('transaksi.destroy', $data->id_transaksi) }}" method="POST" id='hps-trs'onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded" id='hps-trs'>Hapus</button>
+                            </form>
+                        </td>
+                        @endif
                         <td class="px-6 py-2">{{ $data->pemeriksaan ? $data->pemeriksaan->bidang_p : "Tidak ada" }}</td>
                         <td class="px-6 py-2">{{ $data->pemeriksaan ? $data->pemeriksaan->jenis_p : "Tidak ada" }}</td>
                         <td class="px-6 py-2">{{ $data->pemeriksaan ? $data->pemeriksaan->sub_p : "Tidak ada" }}</td>
                         <td class="px-6 py-2">{{ $data->hasil }}</td>
                         <td class="px-6 py-2">{{ $data->pemeriksaan ? $data->pemeriksaan->nilai_normal : "Tidak ada" }}</td>
-                        <td class="px-6 py-2">{{ $data->pemeriksaan ? $data->pemeriksaan->tarif : "Tidak ada" }}</td>
+                        <td class="px-6 py-2 text-right">{{ $data->pemeriksaan ? $data->pemeriksaan->tarif : "Tidak ada" }}</td>
+
                     </tr>
                     @endforeach
                     <tr class="border-b bg-gray-200 text-gray-600 font-bold hover:bg-gray-100">
-                        <td class="px-6 py-2" colspan="6" align='right'>Total</td>
-                        <td class="px-6 py-2">Rp. {{ number_format($total, 0, ',', '.') }}</td>
+                        @if (count($transaksi) == 0)
+                            <td class="px-6 py-2 text-right" colspan="6">Total</td>
+                        @elseif (count($transaksi) > 0 && $pasien->status_pembayaran == "0")
+                            <td class="px-6 py-2 text-right" colspan="7">Total</td>
+                        @else
+                            <td class="px-6 py-2 text-right" colspan="6">Total</td>
+                        @endif
+                        <td class="px-6 py-2 text-right">Rp. {{ number_format($total, 0, ',', '.') }}</td>
                     </tr>
                 </tbody>
             </table>

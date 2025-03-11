@@ -72,7 +72,7 @@
                 <th height="30px">BIDANG</th>
                 <th>PEMERIKSAAN</th>
                 <th>SUB PERIKSA</th>
-                <th>NILAI NORMAL</th>
+                <th>HASIL</th>
                 <th>TARIF</th>
             </tr>
         </thead>
@@ -83,7 +83,7 @@
               <td style="padding: 5px; text-align: center;">{{ $data->pemeriksaan ? $data->pemeriksaan->jenis_p : "Tidak ada" }}</td>
               <td style="padding: 5px; text-align: center;">{{ $data->pemeriksaan ? $data->pemeriksaan->sub_p : "Tidak ada" }}</td>
               <td style="padding: 5px; text-align: center;">{{ $data->hasil }}</td>
-              <td style="padding: 5px; text-align: center;">{{ $data->pemeriksaan ? $data->pemeriksaan->nilai_normal : "Tidak ada" }}</td>
+              <td style="padding: 5px; text-align: center;">{{ $data->pemeriksaan ? $data->pemeriksaan->tarif : "Tidak ada" }}</td>
             </tr>
             @endforeach
             <tr>

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpeg" href="{{ asset('images/logo ankes.jpeg') }}">
     <title>Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -13,7 +14,7 @@
         <div class="flex justify-center mb-7">
             <img src="{{ asset('images/logo ankes.jpeg') }}" alt="Logo" width="150">
         </div>
-        <h2 class="text-2xl font-bold text-center text-gray-700 mb-1">Labolatorium Analisis Kesehatan</h2>
+        <h2 class="text-2xl font-bold text-center text-gray-700 mb-1">Teknologi Laboratorium  Medik</h2>
         <p class="text-2xl font-medium text-center text-gray-700 mb-5">SMK Harapan Bangsa</p>
 
 
@@ -31,7 +32,7 @@
                 }
             }, 3000);
             </script> 
-         @endif
+        @endif
 
         @if($errors->any())
             <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
