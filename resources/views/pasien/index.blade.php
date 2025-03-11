@@ -38,6 +38,7 @@
                 <th class="py-3 px-6 text-left">Kategori</th>
                 <th class="py-3 px-6 text-left">Gender</th>
                 <th class="py-3 px-6 text-left">Dokter</th>
+                <th class="py-3 px-6 text-left">Aksi</th>
             </tr>
         </thead>
         <tbody class="text-gray-600 text-sm">
@@ -53,6 +54,13 @@
                 <td class="py-3 px-6">{{ $data->kateg ? $data->kateg->kategori : 'Tidak ada' }}</td>
                 <td class="py-3 px-6">{{ $data->jenis_kelamin }}</td>
                 <td class="py-3 px-6">{{ $data->dokter ?$data->dokter->nama_dokter : 'Tidak ada Dokter' }}</td>
+                <td>
+                <form id='delet-met'action="{{ route('pasien.destroy', $data->kd_reg) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" id='delet-med' class="bg-red-500 text-white px-4 py-2 rounded">Hapus</button>
+                </form>
+                </td>
             </tr>
             @endforeach
 

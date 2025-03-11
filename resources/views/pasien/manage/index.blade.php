@@ -40,7 +40,7 @@
                 <th class="py-3 px-6 text-left">Dokter</th>
                 <th class="py-3 px-6 text-left">Petugas</th>
                 <th class="py-3 px-6 text-left">Pembayaran</th>
-                <th class="py-3 px-6 text-center">Aksi</th>
+                <th class="py-3 px-6 text-left">Aksi</th>
             </tr>
         </thead>
         <tbody class="text-gray-600 text-sm">
@@ -57,25 +57,15 @@
                 <td class="py-3 px-6">{{ $data->jenis_kelamin }}</td>
                 <td class="py-3 px-6">{{ $data->dokter ?$data->dokter->nama_dokter : 'Tidak ada Dokter' }}</td>
                 <td class="py-3 px-6">{{ $data->petugas ?$data->petugas->nama_petugas : 'Tidak ada Petugas' }}</td>
-                <td class="py-3 px-6" align="center">
-                    @if ($data->status_pembayaran == "0")
+                <td class="py-3 px-6" align="center">@if ($data->status_pembayaran == "0")
                     <p class="bg-red-500 text-white rounded-md font-semibold py-2 shadow-md  w-full">Belum Lunas</p>
                     @elseif ($data->status_pembayaran == "1")
                     <p class="bg-green-500 text-white rounded-md font-semibold py-2 shadow-md w-full">Lunas</p>
-                    @endif
-                </td>
-                <td class="py-3 px-6 text-center">
-                    <div class="flex flex-col space-y-2">
-                    <a href="{{ route('pemeriksaan.proses',  $data->kd_reg) }}" class="bg-yellow-500 text-white px-3 py-1 rounded-full">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                    <form id='delet-met'action="{{ route('pasien.destroy', $data->kd_reg) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" id='delet-med' class="bg-red-500 text-white px-4 py-2 rounded-full"><i class="fas fa-trash"></i></button>
-                    </form>
-                    </div>
-                </td>
+                @endif</td>
+                <td class="py-3 px-6">
+                    <a href="{{ route('pemeriksaan.proses',  $data->kd_reg) }}" class="bg-yellow-500 text-white px-3 py-1 rounded-lg">
+                    Edit
+                </a></td>
             </tr>
             @endforeach
 

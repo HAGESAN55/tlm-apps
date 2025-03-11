@@ -121,8 +121,8 @@
         </div>
 
         <div class="mt-4">
-          <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-md shadow">Registrasi</button>
-          <button type="button" class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-md shadow" onclick="window.history.back()">Kembali</button>          
+          <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded-md shadow">Registrasi</button>
+          <button type="button" class="bg-yellow-500 text-white px-6 py-2 rounded-md shadow" onclick="window.history.back()">Kembali</button>          
         </div>
     </form>
 </div>

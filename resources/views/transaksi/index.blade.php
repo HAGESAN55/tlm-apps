@@ -37,13 +37,7 @@
                 <td class="py-3 px-6">{{ $data->biaya }}</td>
                 <td class="py-3 px-6">{{ $data->uang_bayar }}</td>
                 <td class="py-3 px-6">{{ $data->uang_kembali }}</td>
-                <td class="py-3 px-6">
-                    @if ($data->status == "1")
-                    <p class="bg-green-500 text-white rounded-md font-normal text-center py-2 shadow-md  w-full">Lunas</p>
-                    @else
-                    <p class="bg-red-500 text-white rounded-md font-normal text-center py-2 shadow-md w-full">Belum Lunas</p>
-                    @endif
-                </td>
+                <td class="py-3 px-6">{{ $data->status }}</td>
             </tr>
             @endforeach
 
